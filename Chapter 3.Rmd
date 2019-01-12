@@ -1,0 +1,74 @@
+---
+title: "Chapter 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Question 8
+
+__a__
+```{r q8 a}
+library(MASS)
+library(ISLR)
+lm.fit8=lm(mpg~horsepower,Auto)
+summary(lm.fit8)
+```
+
+__b__
+```{r q8 b}
+plot(Auto$horsepower,Auto$mpg)
+abline(lm.fit8)
+```
+
+__c__
+```{r q8 c}
+plot(lm.fit8)
+```
+
+##Question 9
+
+__a__
+```{r q9 a}
+pairs(Auto)
+```
+
+__b__
+```{r q9 b}
+cor(subset(Auto,select=-name))
+```
+
+__c__
+```{r q9 c}
+lm.fit9=lm(mpg~.-name,Auto)
+summary(lm.fit9)
+```
+
+__d__
+```{r q9 d}
+plot(lm.fit9)
+```
+
+__e__
+Fit predictors with interaction effects
+```{r q9 e}
+lm.fit9=lm(mpg~horsepower*weight,Auto)
+summary(lm.fit9)
+```
+
+__f__
+```{r q9 f}
+lm.fit9=lm(mpg~log(horsepower),Auto)
+summary(lm.fit9)
+```
+
+##Question 10
+
+__a__
+```{r q10 a}
+lm.fit10=lm(Sales~Price+Urban+US,Carseats)
+summary(lm.fit10)
+```
+
