@@ -1,0 +1,23 @@
+---
+title: "Chapter 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Question 8
+
+__Part a__
+```{r q8 a}
+library(MASS)
+library(ISLR)
+lm.fit1=lm(mpg~horsepower,Auto)
+summary(lm.fit1)
+```
+
+```{r q8 b}
+plot(Auto$horsepower,Auto$mpg)
+abline(lm.fit1)
+```
