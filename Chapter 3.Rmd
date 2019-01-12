@@ -72,20 +72,3 @@ __a__
 lm.fit10=lm(Sales~Price+Urban+US,Carseats)
 summary(lm.fit10)
 ```
-
-=======
-#Question 8
-
-__Part a__
-```{r q8 a}
-library(MASS)
-library(ISLR)
-lm.fit1=lm(mpg~horsepower,Auto)
-summary(lm.fit1)
-```
-
-```{r q8 b}
-plot(Auto$horsepower,Auto$mpg)
-abline(lm.fit1)
-```
->>>>>>> 14b5890a745f2ed0340e6762e3c15613581f75c1
