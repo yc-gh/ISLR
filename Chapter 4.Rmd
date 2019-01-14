@@ -1,0 +1,41 @@
+---
+title: "Chapter 4"
+author: "YC"
+date: "January 12, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter 4
+
+##Question 10
+
+__A__
+```{r q10 a}
+library(ISLR)
+summary(Weekly)
+plot(Weekly)
+```
+
+__B__
+```{r q10 b}
+glm.fit=glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,data=Weekly,family=binomial)
+summary(glm.fit)
+```
+
+__C__
+```{r q10 c}
+glm.probs=predict(glm.fit,type="response")
+glm.pred=rep("Down",length(Weekly$Direction))
+glm.pred[glm.probs>0.5]="Up"
+table(glm.pred,Weekly$Direction)
+mean(glm.pred==Weekly$Direction)
+```
+
+__D__
+```{r q10 d}
+train=(Weekly$Year<2009)
+test=
