@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 __A__
 ```{r q10 a}
 library(ISLR)
+library(MASS)
 summary(Weekly)
 plot(Weekly)
 ```
@@ -37,5 +38,48 @@ mean(glm.pred==Weekly$Direction)
 
 __D__
 ```{r q10 d}
-train=(Weekly$Year<2009)
-test=
+train.yrs=Weekly$Year<2009
+train=Weekly[train.yrs,]
+test=Weekly[!train.yrs,]
+glm.fit=glm(Direction~Lag2,data=train,family=binomial)
+glm.probs=predict(glm.fit,test,type="response")
+glm.pred=ifelse(glm.probs>=0.5,"Up","Down")
+table(glm.pred,test$Direction)
+mean(glm.pred==test$Direction)
+```
+
+__E__
+```{r q10 e}
+lda.fit=lda(Direction~Lag2,data=train)
+lda.pred=predict(lda.fit,test)
+lda.class=lda.pred$class
+table(lda.class,test$Direction)
+mean(lda.class==test$Direction)
+```
+
+__F__
+```{r q10 f}
+qda.fit=qda(Direction~Lag2,data=train)
+qda.pred=predict(qda.fit,test)
+qda.class=qda.pred$class
+table(qda.class,test$Direction)
+mean(qda.class==test$Direction)
+```
+
+__G__
+```{r q10 g}
+library(class)
+set.seed(1)
+train.X=as.matrix(train$Lag2)
+test.X=as.matrix(test$Lag2)
+train.Direction=Weekly$Direction[train.yrs]
+knn.pred=knn(train.X,test.X,train.Direction,k=1)
+table(knn.pred,test$Direction)
+mean(knn.pred==test$Direction)
+```
+
+__H__
+
+Logistic regression and LDA produced best fits with 62.5% accuracy of predictions
+
+__I__
