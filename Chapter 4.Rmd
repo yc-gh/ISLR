@@ -101,6 +101,7 @@ pairs(mpgdf)
 
 __C__
 ```{r q11 c}
+set.seed(1)
 train.set=sample(1:nrow(mpgdf),nrow(mpgdf)*0.7,replace=F)
 train.data=mpgdf[train.set,]
 test.data=mpgdf[-train.set,]
@@ -108,6 +109,41 @@ test.data=mpgdf[-train.set,]
 
 __D__
 ```{r q11 d}
-lda.fit11=lda(mpg01~displacement+horsepower+weight+acceleration,data=mpgdf)
+lda.fit11=lda(mpg01~displacement+horsepower+weight+acceleration,data=train.data)
+lda.fit11.class=predict(lda.fit11,test.data)$class
+table(lda.fit11.class,test.data$mpg01)
+mean(lda.fit11.class!=test.data$mpg01)
 ```
 
+__E__
+```{r q11 e}
+qda.fit11=qda(mpg01~displacement+horsepower+weight+acceleration,data=train.data)
+qda.fit11.class=predict(qda.fit11,test.data)$class
+table(qda.fit11.class,test.data$mpg01)
+mean(qda.fit11.class!=test.data$mpg01)
+```
+
+__F__
+```{r q11 f}
+glm.fit11=glm(mpg01~displacement+horsepower+weight+acceleration,data=train.data)
+glm.fit11.probs=predict(glm.fit11,test.data,type="response")
+glm.fit11.probs=ifelse(glm.fit11.probs>0.5,1,0)
+table(glm.fit11.probs,test.data$mpg01)
+mean(glm.fit11.probs!=test.data$mpg01)
+```
+
+__G__
+```{r q11 g}
+library(class)
+knn11.train=cbind(train.data$displacement,train.data$horsepower,train.data$weight,train.data$acceleration)
+knn11.test=cbind(test.data$displacement,test.data$horsepower,test.data$weight,test.data$acceleration)
+set.seed(1)
+knn11.pred=knn(knn11.train,knn11.test,train.data$mpg01,k=1)
+table(knn11.pred,test.data$mpg01)
+mean(knn11.pred!=test.data$mpg01)
+```
+
+##Question 12
+
+__A__
+```{r q12 a}
