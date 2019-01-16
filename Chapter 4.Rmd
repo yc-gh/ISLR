@@ -38,7 +38,7 @@ mean(glm.pred==Weekly$Direction)
 
 __D__
 ```{r q10 d}
-train.yrs=Weekly$Year<2009
+train.yrs=Weekly$Year %in% (1990:2008)
 train=Weekly[train.yrs,]
 test=Weekly[!train.yrs,]
 glm.fit=glm(Direction~Lag2,data=train,family=binomial)
@@ -83,3 +83,31 @@ __H__
 Logistic regression and LDA produced best fits with 62.5% accuracy of predictions
 
 __I__
+
+
+
+##Question 11
+
+__A__
+```{r q11 a}
+mpg01=as.matrix(ifelse((Auto$mpg)>median(Auto$mpg),1,0))
+mpgdf=data.frame(Auto,mpg01)
+```
+
+__B__
+```{r q11 b}
+pairs(mpgdf)
+```
+
+__C__
+```{r q11 c}
+train.set=sample(1:nrow(mpgdf),nrow(mpgdf)*0.7,replace=F)
+train.data=mpgdf[train.set,]
+test.data=mpgdf[-train.set,]
+```
+
+__D__
+```{r q11 d}
+lda.fit11=lda(mpg01~displacement+horsepower+weight+acceleration,data=mpgdf)
+```
+
