@@ -147,3 +147,47 @@ mean(knn11.pred!=test.data$mpg01)
 
 __A__
 ```{r q12 a}
+Power=function(){
+  print(2^3)
+}
+Power()
+```
+
+__B__
+```{r q12 b}
+Power2=function(x,a){
+  print(x^a)
+}
+Power2(3,8)
+```
+
+__C__
+```{r q12 c}
+Power2(10,3)
+Power2(8,17)
+Power2(131,3)
+```
+
+__D__
+```{r q12 d}
+Power3=function(x,a){
+  retvalue=(x^a)
+  return(retvalue)
+}
+x=Power3(2,3)
+x
+```
+
+__E__
+```{r q12 e}
+x=1:10
+plot(x,Power3(x,2),log='xy',xlab='1:10',ylab='x^2')
+```
+
+__F__
+```{r q12 f}
+PlotPower=function(x,a){
+  plot(x,x^a)
+}
+PlotPower(1:10,3)
+```
