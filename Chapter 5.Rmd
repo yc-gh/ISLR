@@ -1,0 +1,12 @@
+---
+title: "Chapter 5"
+author: "YC"
+date: "January 17, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Question 
